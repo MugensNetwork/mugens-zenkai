@@ -95,7 +95,7 @@
   "submit": {
     "production": {
       "ios": {
-        "ascAppId": "6444370199"
+        "ascAppId": "TODO_YOUR_APP_STORE_CONNECT_APP_ID"
       }
     }
   }
