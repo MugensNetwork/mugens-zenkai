@@ -1,12 +1,27 @@
-# Bluesky Social App
+# Mugens App
 
-Welcome friends! This is the codebase for the Bluesky Social app.
+Welcome friends! This is the codebase for the Mugens Network app.
 
-Get the app itself:
+Mugens is a cross-platform application for Web, iOS, and Android built on the AT Protocol and based on the open-source Bluesky Social app.
 
-- **Web: [bsky.app](https://bsky.app)**
-- **iOS: [App Store](https://apps.apple.com/us/app/bluesky-social/id6444370199)**
-- **Android: [Play Store](https://play.google.com/store/apps/details?id=xyz.blueskyweb.app)**
+## Branches
+
+This repository keeps the upstream Bluesky Social app and the Mugens app separated by branch:
+
+- **`main`**: mirror of the upstream [`bluesky-social/social-app`](https://github.com/bluesky-social/social-app) repository.
+- **`mugens`**: Mugens Network application branch, containing Mugens-specific branding, features, configuration, and integrations.
+
+The `main` branch should stay as close as possible to upstream. Mugens development should happen on the `mugens` branch.
+
+## Get the app
+
+Mugens is currently in development. Public app links will be added here when available.
+
+<!--
+- **Web: [mugens.app](https://mugens.app)**
+- **iOS: [App Store](#)**
+- **Android: [Play Store](#)**
+-->
 
 ## Development Resources
 
@@ -23,55 +38,70 @@ The Authenticated Transfer Protocol ("AT Protocol" or "atproto") is a decentrali
 - [Protocol Specifications](https://atproto.com/specs/atp)
 - [Blogpost on self-authenticating data structures](https://bsky.social/about/blog/3-6-2022-a-self-authenticating-social-protocol)
 
-The Bluesky Social application encompasses a set of schemas and APIs built in the overall AT Protocol framework. The namespace for these "Lexicons" is `app.bsky.*`.
-
 ## Contributions
 
 > [!NOTE]
-> While we do accept contributions, we prioritize high quality issues and pull requests. Adhering to the below guidelines will ensure a more timely review.
+> Mugens is currently in early development. While contributions are welcome, the project may prioritize foundational architecture, upstream synchronization, and Mugens-specific product direction.
 
 **Rules:**
 
-- We may not respond to your issue or PR.
+- We may not respond to every issue or PR.
 - We may close an issue or PR without much feedback.
-- We may lock discussions or contributions if our attention is getting DDOSed.
-- We're not going to provide support for build issues.
+- We may lock discussions or contributions if moderation becomes difficult.
+- We may not provide support for all build issues while the fork is still being adapted.
 
 **Guidelines:**
 
 - Check for existing issues before filing a new one please.
-- Open an issue and give some time for discussion before submitting a PR.
+- Open an issue and give some time for discussion before submitting a large PR.
+- Keep changes focused and easy to review.
+- Avoid PRs that make upstream synchronization harder without a clear reason.
 - Stay away from PRs like...
-  - Changing "Post" to "Skeet."
-  - Refactoring the codebase, e.g., to replace React Query with Redux Toolkit or something.
-  - Adding entirely new features without prior discussion. 
+  - Large refactors without prior discussion.
+  - Replacing core dependencies without a migration plan.
+  - Adding entirely new features without prior discussion.
+  - Making broad branding or product changes outside the Mugens direction.
 
-Remember, we serve a wide community of users. Our day-to-day involves us constantly asking "which top priority is our top priority." If you submit well-written PRs that solve problems concisely, that's an awesome contribution. Otherwise, as much as we'd love to accept your ideas and contributions, we really don't have the bandwidth. That's what forking is for!
+The `main` branch tracks the upstream Bluesky Social app. Pull requests for Mugens-specific work should target the `mugens` branch unless explicitly stated otherwise.
 
 ## Forking guidelines
 
-You have our blessing 🪄✨ to fork this application! However, it's very important to be clear to users when you're giving them a fork.
+This application is already a fork of the Bluesky Social app, adapted for Mugens Network.
+
+If you fork this repository, please be clear to users when you're giving them a fork of Mugens.
 
 Please be sure to:
 
-- Change all branding in the repository and UI to clearly differentiate from Bluesky.
-- Change any support links (feedback, email, terms of service, etc) to your own systems.
-- Replace any analytics or error-collection systems with your own so we don't get super confused.
+- Change all branding in the repository and UI to clearly differentiate from Mugens and Bluesky.
+- Change any support links, feedback links, email addresses, terms of service, privacy policy, and other project links to your own systems.
+- Replace any analytics or error-collection systems with your own systems.
+- Review any default service endpoints before publishing your fork.
+- Preserve upstream license notices where required.
 
 ## Security disclosures
 
-If you discover any security issues, please send an email to security@bsky.app. The email is automatically CC'd to the entire team and we'll respond promptly.
+If you discover any security issues in Mugens-specific code, please send an email to:
+
+```txt
+security@mugens.org
+```
+
+If the issue affects the upstream Bluesky Social app, please report it to Bluesky through their official security disclosure process.
 
 ## Are you a developer interested in building on atproto?
 
-Bluesky is an open social network built on the AT Protocol, a flexible technology that will never lock developers out of the ecosystems that they help build. With atproto, third-party integration can be as seamless as first-party through custom feeds, federated services, clients, and more.
+AT Protocol is a flexible technology for building decentralized social applications. With atproto, third-party integration can be seamless through custom feeds, federated services, clients, AppViews, lexicons, and more.
+
+Mugens builds on this foundation to explore manga, novels, catalog data, reading communities, and social interaction on top of an open protocol.
 
 ## License (MIT)
 
 See [./LICENSE](./LICENSE) for the full license.
 
+This repository is based on the Bluesky Social app. Please preserve upstream copyright and license notices where applicable.
+
 Bluesky Social PBC has committed to a software patent non-aggression pledge. For details see [the original announcement](https://bsky.social/about/blog/10-01-2025-patent-pledge).
 
 ## P.S.
 
-We ❤️ you and all of the ways you support us. Thank you for making Bluesky a great place!
+We ❤️ open protocols, open-source software, and everyone helping build the Mugens Network.
