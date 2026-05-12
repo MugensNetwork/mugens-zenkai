@@ -4,6 +4,9 @@ import {EMOJI_REACTION_LIMIT} from '#/lib/constants'
 import {logger} from '#/logger'
 import * as bsky from '#/types/bsky'
 
+export const MESSAGE_GAP_THRESHOLD_MS = 60 * 60 * 1000
+export const CLUSTERED_MESSAGE_THRESHOLD_MS = 5 * 60 * 1000
+
 export function canBeMessaged(profile: bsky.profile.AnyProfileView) {
   switch (profile.associated?.chat?.allowIncoming) {
     case 'none':
@@ -69,7 +72,7 @@ export type ConvoWithDetails = {view: ChatBskyConvoDefs.ConvoView} & (
   | {
       kind: 'group'
       details: $Typed<ChatBskyConvoDefs.GroupConvo>
-      primaryMember: GroupConvoMember // the owner
+      primaryMember?: GroupConvoMember // the owner - may have left, thus optional
       members: Array<GroupConvoMember>
     }
   | {
@@ -115,11 +118,6 @@ export function parseConvoView(
         )
         return null
       }
-    }
-
-    if (!owner) {
-      logger.warn('No owner found in group convo')
-      return null
     }
 
     return {

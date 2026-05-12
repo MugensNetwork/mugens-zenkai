@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {View} from 'react-native'
+import {moderateProfile, type ModerationOpts} from '@atproto/api'
 import {Trans, useLingui} from '@lingui/react/macro'
 
 import {useOpenComposer} from '#/lib/hooks/useOpenComposer'
@@ -17,7 +18,10 @@ import {
   StackedButton,
 } from '#/components/Button'
 import * as Dialog from '#/components/Dialog'
-import {type ConvoWithDetails} from '#/components/dms/util'
+import {
+  type ConvoWithDetails,
+  type GroupConvoMember,
+} from '#/components/dms/util'
 import * as Toggle from '#/components/forms/Toggle'
 import {ArrowRight_Stroke2_Corner0_Rounded as ArrowRightIcon} from '#/components/icons/Arrow'
 import {ArrowShareRight_Stroke2_Corner2_Rounded as ArrowShareRightIcon} from '#/components/icons/ArrowShareRight'
@@ -39,16 +43,24 @@ enum Step {
 export function InviteLinkDialog({
   convo,
   control,
+  owner,
   isOwner,
+  moderationOpts,
 }: {
   convo: Extract<ConvoWithDetails, {kind: 'group'}>
   control: Dialog.DialogOuterProps['control']
+  owner: GroupConvoMember
   isOwner: boolean
+  moderationOpts: ModerationOpts
 }) {
   const t = useTheme()
   const {t: l, i18n} = useLingui()
 
-  const ownerName = createSanitizedDisplayName(convo.primaryMember)
+  const ownerName = createSanitizedDisplayName(
+    owner,
+    false,
+    moderateProfile(owner, moderationOpts).ui('displayName'),
+  )
 
   const {joinLink} = convo.details
   const enabledStatus = joinLink?.enabledStatus
@@ -210,7 +222,7 @@ export function InviteLinkDialog({
                     name={option.name}
                     style={[a.flex_1]}>
                     {({selected}) => (
-                      <TargetOption
+                      <Toggle.RadioWithLabel
                         label={isOwner ? option.owner : option.member}
                         selected={selected}
                       />
@@ -440,24 +452,5 @@ export function InviteLinkDialog({
         {content}
       </Dialog.ScrollableInner>
     </Dialog.Outer>
-  )
-}
-
-function TargetOption({label, selected}: {label: string; selected: boolean}) {
-  const t = useTheme()
-
-  return (
-    <View style={[a.flex_1, a.flex_row, a.align_center, a.gap_sm]}>
-      <Toggle.Radio />
-      <Toggle.LabelText
-        style={[
-          a.font_normal,
-          a.flex_1,
-          a.leading_tight,
-          selected ? t.atoms.text : t.atoms.text_contrast_high,
-        ]}>
-        {label}
-      </Toggle.LabelText>
-    </View>
   )
 }
